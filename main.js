@@ -2,12 +2,12 @@
 import inquirer from "inquirer";
 let todos = [];
 async function createTodo(todos) {
-    do {
+    while (true){
         let ans = await inquirer.prompt({
             type: "list",
             message: "select an operation",
             name: "select",
-            choices: ["add", "update", "delete", "view"]
+            choices: ["add", "update", "delete", "view", "exit"]
         });
         if (ans.select == "add") {
             let addTodo = await inquirer.prompt({
@@ -48,6 +48,10 @@ async function createTodo(todos) {
             todos = [...newTodos];
             console.log(todos);
         }
-    } while (true);
+        if (ans.select == "exit"){
+            console.log('Exiting...');
+            break;
+        }
+    }
 }
 createTodo(todos);
